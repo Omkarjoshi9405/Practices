@@ -6,7 +6,6 @@ import (
 )
 
 func odd(odd1 chan bool, even1 chan bool, wg *sync.WaitGroup) {
-	fmt.Println("in odd processor")
 
 	defer wg.Done()
 	for i := 1; i <= 49; i += 2 {
@@ -17,8 +16,6 @@ func odd(odd1 chan bool, even1 chan bool, wg *sync.WaitGroup) {
 }
 
 func even(odd1 chan bool, even1 chan bool, wg *sync.WaitGroup) {
-
-	fmt.Println("in even processor")
 
 	defer wg.Done()
 	for i := 2; i <= 50; i += 2 {
@@ -33,8 +30,6 @@ func main() {
 	odd1 := make(chan bool)
 	even1 := make(chan bool)
 
-	fmt.Println("channel created")
-
 	wg.Add(2)
 
 	go odd(odd1, even1, &wg)
@@ -43,7 +38,5 @@ func main() {
 	odd1 <- true
 
 	wg.Wait()
-
-	fmt.Println("Promgram ended")
 
 }
